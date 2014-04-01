@@ -1,0 +1,13 @@
+<h1 class="jumbotron">All Species</h1>
+<h4>Click a species name to view or add sightings.</h4>
+
+<ul>
+  <% @species.each do |species| %>
+    <form action="/species/destroy" method="post">
+      <input id="species_id" name="id" value="<%= species.id %>" type="hidden">
+        <li><button class="btn btn-danger">DELETE!</button>   <%= species.name %></li>
+        <br/>
+      </input>
+    </form>
+  <% end %>
+</ul>

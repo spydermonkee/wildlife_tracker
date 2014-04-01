@@ -6,7 +6,9 @@ class SightingsController < ApplicationController
     if @sighting.save
       redirect_to :back
     else
-      render('species/show.html.erb')
+      @regions = Region.all
+      @one_species = Species.find(params[:sighting][:species_id])
+      render("/species/show.html.erb")
     end
   end
 end

@@ -1,14 +1,27 @@
 <h1 class="jumbotron"><%= @one_species.name %></h1>
 
 <h3>Sightings: </h3>
+<% if @one_species.sightings %>
 <ul>
   <% @one_species.sightings.each do |sighting| %>
     <li>Date and time: <%= sighting.datetime %> Region: <%= sighting.region.name %></li>
   <% end %>
 </ul>
+<% end %>
+
+<% if @sighting %>
+  <% if @sighting.errors.any? %>
+    <h3>Please fix these errors:</h3>
+    <ul>
+      <% @sighting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
 
 <h3>Add Sighting</h3>
-<form action="/sightings" method="post" class="form-inline" >
+  <form action="/species/<%=@one_species.id%>" method="post" class="form-inline">
   <input name="sighting[species_id]" type="hidden" value="<%= @one_species.id %>">
   <label for="sighting_date">Date sighted</label>
   <input id="sighting_date" name="sighting[date]" type="date"></input>
@@ -16,9 +29,16 @@
   <input id="sighting_time" name="sighting[time]" type="time"></input>
   <label for="sighting_region">Region</label>
   <select id="sighting_region" name="sighting[region_id]">
+    <option disabled selected><em>Select Region</em></option>
     <% @regions.each do |region| %>
       <option value="<%= region.id %>"><%= region.name %></option>
     <% end %>
   </select>
   <button class="btn btn-warning">Add Sighting</button>
 </form>
+
+<br/>
+<p><a href="/species/<%= @one_species.id%>/edit">Edit Species</a></p>
+
+<br/>
+<p><a href="/species">Main Menu</a></p>
