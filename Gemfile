@@ -8,6 +8,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'less-rails-bootstrap'
+gem 'therubyracer'
 
 group :development do
   gem 'better_errors'
