@@ -1,10 +1,22 @@
-<h1>All Species</h1>
+<h1 class="jumbotron">All Species</h1>
+<h4>Click a species name to view or add sightings.</h4>
 
 <ul>
   <% @species.each do |species| %>
-    <li> <%= species.name %> </li>
+    <li><a href="/species/<%=species.id%>"><%= species.name %></a></li>
   <% end %>
 </ul>
+
+<% if @one_species %>
+  <% if @one_species.errors.any? %>
+    <h3>Please fix these errors:</h3>
+    <ul>
+      <% @one_species.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
 
 <form action="/species" method="post" class="form-inline" >
   <label for="species_name">Species Name</label>

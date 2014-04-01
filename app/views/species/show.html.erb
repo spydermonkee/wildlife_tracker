@@ -1,0 +1,24 @@
+<h1 class="jumbotron"><%= @one_species.name %></h1>
+
+<h3>Sightings: </h3>
+<ul>
+  <% @one_species.sightings.each do |sighting| %>
+    <li>Date and time: <%= sighting.datetime %> Region: <%= sighting.region.name %></li>
+  <% end %>
+</ul>
+
+<h3>Add Sighting</h3>
+<form action="/sightings" method="post" class="form-inline" >
+  <input name="sighting[species_id]" type="hidden" value="<%= @one_species.id %>">
+  <label for="sighting_date">Date sighted</label>
+  <input id="sighting_date" name="sighting[date]" type="date"></input>
+  <label for="sighting_time">Time sighted</label>
+  <input id="sighting_time" name="sighting[time]" type="time"></input>
+  <label for="sighting_region">Region</label>
+  <select id="sighting_region" name="sighting[region_id]">
+    <% @regions.each do |region| %>
+      <option value="<%= region.id %>"><%= region.name %></option>
+    <% end %>
+  </select>
+  <button class="btn btn-warning">Add Sighting</button>
+</form>

@@ -12,3 +12,7 @@
  *= require_tree .
  *= require twitter/bootstrap
  */
+
+li {
+  font-size: 1.2em;
+}
