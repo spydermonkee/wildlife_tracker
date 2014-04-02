@@ -1,0 +1,44 @@
+<h1><%=@sighting.species.name%> Sighting</h1>
+
+<% if @sighting.errors.any? %>
+  <h3>Please fix these errors:</h3>
+  <ul>
+    <% @sighting.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h3>Edit Sighting</h3>
+  <form action="/sightings/<%=@sighting.id%>/edit" method="post" class="form-inline">
+  <input name="sighting[species_id]" type="hidden" value="<%= @sighting.species_id %>">
+  <label for="sighting_date">Date sighted</label>
+  <input id="sighting_date" name="sighting[date]" type="date" value="<%= @sighting.date %>"></input>
+  <label for="sighting_time">Time sighted</label>
+  <input id="sighting_time" name="sighting[time]" type="time"></input>
+  <label for="sighting_region">Region</label>
+  <select id="sighting_region" name="sighting[region_id]">
+    <% @regions.each do |region| %>
+      <% if region.id == @sighting.region_id %>
+        <option value="<%= region.id %>" selected ><%= region.name %></option>
+      <% else %>
+        <option value="<%= region.id %>"><%= region.name %></option>
+      <% end %>
+    <% end %>
+  </select>
+  <button class="btn btn-warning">Edit Sighting</button>
+</form>
+<br/>
+
+<form action="/sightings/<%= @sighting.id %>/delete" method="post" >
+  <input id="sightings_id" name="id" value="<%= @sighting.id %>" type="hidden"></input>
+  <button class='btn btn-danger'>DELETE THIS SIGHTING</button>
+</form>
+
+
+
+
+
+
+
+

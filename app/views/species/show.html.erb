@@ -1,12 +1,13 @@
 <h1 class="jumbotron"><%= @one_species.name %></h1>
 
 <h3>Sightings: </h3>
-<% if @one_species.sightings %>
-<ul>
-  <% @one_species.sightings.each do |sighting| %>
-    <li>Date and time: <%= sighting.datetime %> Region: <%= sighting.region.name %></li>
-  <% end %>
-</ul>
+<% if @one_species.sightings.length != 0 %>
+  <ul>
+    <% @one_species.sightings.each do |sighting| %>
+      <li><a href="/sightings/<%= sighting.id%>/edit">Date and time: <%= sighting.datetime %> Region: <%= sighting.region.name %></a></li>
+    <% end %>
+  </ul>
+  <p>Click a sighting to edit it.</p>
 <% end %>
 
 <% if @sighting %>
